@@ -1,5 +1,15 @@
 import { TerminalApp } from '@/components/terminal-app'
-import { Terminal, TerminalCommand, TerminalDiff, TerminalOutput, TerminalSpinner, TerminalBadge, TerminalMarker, ThemeSwitcher } from '@/components/terminal'
+import {
+  Terminal,
+  TerminalCommand,
+  TerminalDiff,
+  TerminalOutput,
+  TerminalSpinner,
+  TerminalBadge,
+  TerminalMarker,
+  TerminalLogLine,
+  ThemeSwitcher,
+} from '@/components/terminal'
 import { TerminalProgress } from '@/components/terminal-progress'
 import { LogDemo } from './log-demo'
 import { PromptDemo } from './prompt-demo'
@@ -14,25 +24,19 @@ export default function PlaygroundPage() {
   return (
     <main className="flex flex-col gap-8 p-6 min-h-screen">
       <section className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold font-mono text-[var(--term-fg)]">
-          Playground
-        </h1>
+        <h1 className="text-xl font-semibold font-mono text-[var(--term-fg)]">Playground</h1>
         <ThemeSwitcher />
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          Terminal App
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">Terminal App</h2>
         <div className="h-[480px]">
           <TerminalApp className="h-full" />
         </div>
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalPrompt
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalPrompt</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Interactive command input with history navigation (up / down).
         </p>
@@ -40,9 +44,7 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalProgress
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalProgress</h2>
         <Terminal title="progress-demo.sh">
           <TerminalCommand>pnpm install</TerminalCommand>
           <TerminalProgress label="Resolving packages..." percent={25} variant="yellow" />
@@ -53,9 +55,7 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalSpinner
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalSpinner</h2>
         <Terminal title="spinner-demo.sh">
           <TerminalCommand>pnpm run build</TerminalCommand>
           <TerminalSpinner text="Compiling components..." />
@@ -63,9 +63,7 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalLog
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalLog</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Simulated streaming logs with capped history and auto-scroll.
         </p>
@@ -73,20 +71,18 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          Copy Button
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">Copy Button</h2>
         <Terminal title="copy-demo.sh">
           <TerminalCommand>pnpm run build</TerminalCommand>
           <TerminalOutput type="success">Compiled successfully in 1.2s</TerminalOutput>
-          <TerminalOutput type="info">Click the copy icon in the header to copy this output.</TerminalOutput>
+          <TerminalOutput type="info">
+            Click the copy icon in the header to copy this output.
+          </TerminalOutput>
         </Terminal>
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalDiff
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalDiff</h2>
         <Terminal title="diff-demo.sh">
           <TerminalCommand>git diff -- src/config.ts</TerminalCommand>
           <TerminalOutput type="info">Unified</TerminalOutput>
@@ -124,9 +120,7 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalTree
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalTree</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Expandable tree with custom icon, label, and row render props.
         </p>
@@ -138,16 +132,14 @@ export default function PlaygroundPage() {
           Tree Keyboard Navigation
         </h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
-          Arrow keys to navigate, Enter/Space to toggle, ArrowRight to expand/enter, ArrowLeft to collapse/parent.
+          Arrow keys to navigate, Enter/Space to toggle, ArrowRight to expand/enter, ArrowLeft to
+          collapse/parent.
         </p>
         <TreeKeyboardDemo />
       </section>
 
-
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalBadge
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalBadge</h2>
         <Terminal title="badge-demo.sh">
           <TerminalCommand>pnpm run release</TerminalCommand>
           <TerminalOutput type="info">
@@ -162,9 +154,7 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          TerminalMarker
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalMarker</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Phase separators for visual boundaries in terminal feeds.
         </p>
@@ -172,10 +162,10 @@ export default function PlaygroundPage() {
           <TerminalCommand>npm run deploy:full</TerminalCommand>
           <TerminalMarker label="BUILD" timestamp="10:23:45" variant="info" />
           <TerminalOutput type="success">✓ Compiled 42 modules</TerminalOutput>
-          <TerminalOutput type="normal">  dist/main.js  124 KB</TerminalOutput>
+          <TerminalOutput type="normal"> dist/main.js 124 KB</TerminalOutput>
           <TerminalMarker label="TEST" timestamp="10:24:01" variant="success" />
           <TerminalOutput type="success">✓ 24 tests passed</TerminalOutput>
-          <TerminalOutput type="normal">  coverage: 94%</TerminalOutput>
+          <TerminalOutput type="normal"> coverage: 94%</TerminalOutput>
           <TerminalMarker label="DEPLOY" timestamp="10:24:30" variant="warning" />
           <TerminalOutput type="info">→ Deploying to production...</TerminalOutput>
           <TerminalOutput type="success">✓ Deployed successfully</TerminalOutput>
@@ -184,9 +174,65 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
-          Typing Animation
-        </h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalLogLine</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Structured log row primitive with level badge, timestamp, source, and message.
+        </p>
+        <Terminal title="app.log">
+          <TerminalCommand>pnpm run start</TerminalCommand>
+          <TerminalLogLine
+            level="info"
+            timestamp="10:23:44"
+            source="server"
+            message="Starting application..."
+          />
+          <TerminalLogLine
+            level="info"
+            timestamp="10:23:45"
+            source="server"
+            message="Listening on :3000"
+          />
+          <TerminalLogLine
+            level="debug"
+            timestamp="10:23:46"
+            source="worker"
+            message="Spawned 4 worker threads"
+          />
+          <TerminalLogLine
+            level="warn"
+            timestamp="10:23:47"
+            source="auth"
+            message="Token expiring in 5 min for user #42"
+          />
+          <TerminalLogLine
+            level="error"
+            timestamp="10:23:48"
+            source="db"
+            message="Connection refused: ECONNREFUSED 127.0.0.1:5432"
+          />
+          <TerminalLogLine
+            level="info"
+            timestamp="10:23:48"
+            source="db"
+            message="Retrying connection (attempt 1/3)..."
+          />
+          <TerminalLogLine
+            level="success"
+            timestamp="10:23:49"
+            source="db"
+            message="Connected to postgres in 84ms"
+          />
+          <TerminalLogLine
+            level="success"
+            timestamp="10:23:50"
+            source="build"
+            message="Compiled 42 modules in 1.2s"
+          />
+        </Terminal>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">Typing Animation</h2>
         <Terminal title="deploy-log.sh">
           <TerminalCommand>npm run deploy</TerminalCommand>
           <TerminalOutput type="info" animate delay={28}>
