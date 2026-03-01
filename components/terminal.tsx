@@ -18,12 +18,12 @@ const TerminalPromptContext = createContext('$')
 /**
  * Displays a terminal window with macOS-style chrome and content area.
  * Renders a terminal emulator UI with title bar, window controls, and monospace content.
- * 
+ *
  * @param children - Terminal content (TerminalCommand, TerminalOutput, TerminalSpinner components)
  * @param title - Window title shown in the chrome (default: 'Terminal')
  * @param prompt - Command prompt symbol (default: '$')
  * @param className - Additional CSS classes to apply to the container
- * 
+ *
  * @example
  * ```tsx
  * <Terminal title="my-app" prompt="user@host">
@@ -32,7 +32,12 @@ const TerminalPromptContext = createContext('$')
  * </Terminal>
  * ```
  */
-export function Terminal({ children, title = 'Terminal', prompt = '$', className = '' }: TerminalProps) {
+export function Terminal({
+  children,
+  title = 'Terminal',
+  prompt = '$',
+  className = '',
+}: TerminalProps) {
   const contentRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [copied, setCopied] = useState(false)
@@ -60,7 +65,9 @@ export function Terminal({ children, title = 'Terminal', prompt = '$', className
   }
 
   return (
-    <div className={`flex flex-col bg-[var(--term-bg-light)] border border-[var(--glass-border)] rounded-lg overflow-hidden ${className}`}>
+    <div
+      className={`flex flex-col bg-[var(--term-bg-light)] border border-[var(--glass-border)] rounded-lg overflow-hidden ${className}`}
+    >
       {/* Window Chrome */}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[var(--glass-border)] bg-[rgba(0,0,0,0.2)]">
         <div className="flex items-center gap-2">
@@ -68,9 +75,7 @@ export function Terminal({ children, title = 'Terminal', prompt = '$', className
           <div className="w-3 h-3 rounded-full bg-[#eab308]" />
           <div className="w-3 h-3 rounded-full bg-[#10b981]" />
         </div>
-        <div className="text-xs text-[var(--term-fg-dim)] font-mono">
-          {title}
-        </div>
+        <div className="text-xs text-[var(--term-fg-dim)] font-mono">{title}</div>
         <button
           type="button"
           aria-label={copied ? 'Copied terminal content' : 'Copy terminal content'}
@@ -80,9 +85,12 @@ export function Terminal({ children, title = 'Terminal', prompt = '$', className
           {copied ? <Check size={12} className="text-[var(--term-green)]" /> : <Copy size={12} />}
         </button>
       </div>
-      
+
       {/* Terminal Content */}
-      <div ref={contentRef} className="terminal-scroll min-h-0 flex-1 overflow-auto p-4 font-mono text-sm">
+      <div
+        ref={contentRef}
+        className="terminal-scroll min-h-0 flex-1 overflow-auto p-4 font-mono text-sm"
+      >
         <TerminalPromptContext.Provider value={prompt}>{children}</TerminalPromptContext.Provider>
       </div>
     </div>
@@ -98,10 +106,10 @@ interface TerminalCommandProps {
  * Displays a command line in the terminal with a prompt symbol.
  * Renders text with a leading prompt indicator (typically '$' or '#').
  * Inherits prompt from parent Terminal component via context if not specified.
- * 
+ *
  * @param children - The command text to display
  * @param prompt - The prompt symbol to display before the command (inherited from Terminal if omitted)
- * 
+ *
  * @example
  * ```tsx
  * <TerminalCommand prompt="user@host:~$">ls -la</TerminalCommand>
@@ -134,13 +142,13 @@ interface TerminalOutputProps {
  * Displays output text with semantic coloring based on message type.
  * Uses theme colors to indicate success (green), error (red), info (blue), or warning (yellow).
  * Supports optional typing animation for string children and Prism.js syntax highlighting.
- * 
+ *
  * @param children - The output text to display
  * @param type - The type of output message (default: 'normal')
  * @param animate - Enable typing animation (default: false)
  * @param delay - Milliseconds per character when animating (default: 35)
  * @param language - Language for syntax highlighting (e.g. 'json', 'typescript')
- * 
+ *
  * @example
  * ```tsx
  * <TerminalOutput type="success">Build completed successfully</TerminalOutput>
@@ -207,7 +215,11 @@ export function TerminalOutput({
     <div className={`mb-1 whitespace-pre-wrap ${colors[type]}`}>
       {highlightedHtml ? (
         <code className="terminal-code" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
-      ) : animate && textContent !== null ? typedText : children}
+      ) : animate && textContent !== null ? (
+        typedText
+      ) : (
+        children
+      )}
     </div>
   )
 }
@@ -219,9 +231,9 @@ interface TerminalSpinnerProps {
 /**
  * Displays an animated spinner with optional text for loading states.
  * Uses Unicode braille characters for smooth animation.
- * 
+ *
  * @param text - Optional text to display next to the spinner
- * 
+ *
  * @example
  * ```tsx
  * <TerminalSpinner text="Installing dependencies..." />
@@ -260,7 +272,17 @@ export { TerminalAlert } from './terminal-alert'
 export { TerminalTabs } from './terminal-tabs'
 export { TerminalSplit } from './terminal-split'
 export { TerminalDiff } from './terminal-diff'
-export { TerminalAutocomplete, useAutocomplete, COMMON_COMMANDS, COMMON_FLAGS, filterSuggestions, type TerminalAutocompleteProps, type AutocompleteSuggestion } from './terminal-autocomplete'
+export {
+  TerminalAutocomplete,
+  useAutocomplete,
+  COMMON_COMMANDS,
+  COMMON_FLAGS,
+  filterSuggestions,
+  type TerminalAutocompleteProps,
+  type AutocompleteSuggestion,
+} from './terminal-autocomplete'
 export { TerminalGhosttyTheme, GhosttyThemePicker } from './terminal-ghostty'
 export { ThemeSwitcher } from './theme-switcher'
 export { TerminalBadge } from './terminal-badge'
+export { TerminalMarker } from './terminal-marker'
+export { TerminalLogLine, type TerminalLogLineProps } from './terminal-log-line'
