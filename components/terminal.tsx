@@ -265,6 +265,7 @@ export { TerminalPrompt } from './terminal-prompt'
 export { TerminalTree } from './terminal-tree'
 export type { TreeNode, TreeRenderContext, TerminalTreeProps } from './terminal-tree'
 export { TerminalLog, type LogEntry } from './terminal-log'
+export { TerminalFeed, type TerminalFeedProps, type FeedEntry } from './terminal-feed'
 export { TerminalTable, type ColumnAlign } from './terminal-table'
 export { TerminalBarChart, TerminalSparkline, type BarChartVariant } from './terminal-chart'
 export { TerminalSelect } from './terminal-select'
@@ -304,3 +305,9 @@ export {
 } from './terminal-filter-bar'
 export { TerminalStackTrace, type TerminalStackTraceProps } from './terminal-stack-trace'
 export { TerminalJsonLine, type TerminalJsonLineProps } from './terminal-json-line'
+export {
+  TerminalAnsi,
+  parseAnsi,
+  type TerminalAnsiProps,
+  type AnsiSpan,
+} from './terminal-ansi'

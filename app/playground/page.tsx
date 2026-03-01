@@ -12,6 +12,7 @@ import {
 } from '@/components/terminal'
 import { TerminalProgress } from '@/components/terminal-progress'
 import { LogDemo, StructuredLogDemo } from './log-demo'
+import { FeedDemo } from './feed-demo'
 import { FilterBarDemo } from './filter-demo'
 import { TerminalJsonLine } from '@/components/terminal'
 import { PromptDemo } from './prompt-demo'
@@ -20,6 +21,7 @@ import { SearchDemo } from './search-demo'
 import { TreeDemo } from './tree-demo'
 import { TreeKeyboardDemo } from './tree-keyboard-demo'
 import { StackTraceDemo } from './stack-trace-demo'
+import { AnsiDemo } from './ansi-demo'
 
 export const metadata = {
   title: 'Playground',
@@ -250,6 +252,15 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalFeed</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          High-performance log feed. Compare standard (DOM-bounded) vs virtualized (constant node
+          count) modes. Hit ⚡ burst to stress-test.
+        </p>
+        <FeedDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalGroup</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Collapsible command/output sections with header, summary, count pill, and variant accent.
@@ -276,6 +287,15 @@ export default function PlaygroundPage() {
             Deployment complete. URL: https://example.app
           </TerminalOutput>
         </Terminal>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalAnsi</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          ANSI SGR escape-code renderer — standard/bright/256/true-colour, bold, dim, italic,
+          underline, strikethrough, invert. No dangerouslySetInnerHTML.
+        </p>
+        <AnsiDemo />
       </section>
 
       <section className="flex flex-col gap-2">
