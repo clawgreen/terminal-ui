@@ -16,44 +16,52 @@ export interface TerminalLogLineProps {
 }
 
 /**
- * Per-level color tokens.
+ * Per-level color tokens — border, background tint, and text colors.
  *
- * `badge`   — the [LEVEL] indicator pill
- * `message` — default foreground for the message (usually fg, dimmed for debug)
+ * `badge`   — the [LEVEL] indicator pill (border + bg tint, consistent with TerminalBadge)
+ * `message` — foreground for the message body (dimmed for debug, red for error)
  */
 const levelClasses: Record<
   NonNullable<TerminalLogLineProps['level']>,
   { badge: string; message: string }
 > = {
   debug: {
-    badge: 'text-[var(--term-fg-dim)] border-[var(--glass-border)]',
-    message: 'text-[var(--term-fg-dim)]',
+    badge: 'border-(--glass-border) text-(--term-fg-dim) bg-[rgba(255,255,255,0.03)]',
+    message: 'text-(--term-fg-dim)',
   },
   info: {
-    badge: 'text-[var(--term-blue)] border-[var(--term-blue)]/40',
-    message: 'text-[var(--term-fg)]',
+    badge:
+      'border-[var(--term-blue)]/40 text-(--term-blue) bg-[color-mix(in_oklab,var(--term-blue)_10%,transparent)]',
+    message: 'text-(--term-fg)',
   },
   warn: {
-    badge: 'text-[var(--term-yellow)] border-[var(--term-yellow)]/40',
-    message: 'text-[var(--term-fg)]',
+    badge:
+      'border-[var(--term-yellow)]/40 text-(--term-yellow) bg-[color-mix(in_oklab,var(--term-yellow)_10%,transparent)]',
+    message: 'text-(--term-fg)',
   },
   error: {
-    badge: 'text-[var(--term-red)] border-[var(--term-red)]/40',
-    message: 'text-[var(--term-red)]',
+    badge:
+      'border-[var(--term-red)]/40 text-(--term-red) bg-[color-mix(in_oklab,var(--term-red)_10%,transparent)]',
+    message: 'text-(--term-red)',
   },
   success: {
-    badge: 'text-[var(--term-green)] border-[var(--term-green)]/40',
-    message: 'text-[var(--term-fg)]',
+    badge:
+      'border-[var(--term-green)]/40 text-(--term-green) bg-[color-mix(in_oklab,var(--term-green)_10%,transparent)]',
+    message: 'text-(--term-fg)',
   },
 }
 
-/** Fixed uppercase display labels so all levels render at the same visual width. */
+/**
+ * 3-character uppercase level labels.
+ * All entries are exactly 3 chars so the badge pill stays a consistent width
+ * across levels in a monospace font.
+ */
 const levelLabel: Record<NonNullable<TerminalLogLineProps['level']>, string> = {
   debug: 'DBG',
   info: 'INF',
   warn: 'WRN',
   error: 'ERR',
-  success: 'OK ',
+  success: 'OK',
 }
 
 /**
@@ -99,9 +107,9 @@ export function TerminalLogLine({
       {/* Timestamp */}
       {timestamp && <span className="shrink-0 tabular-nums text-(--term-fg-dim)">{timestamp}</span>}
 
-      {/* Level badge */}
+      {/* Level badge — fixed width keeps columns aligned in monospace feeds */}
       <span
-        className={`shrink-0 inline-flex items-center rounded border px-1 py-px text-[10px] font-semibold leading-none tracking-wider ${cls.badge}`}
+        className={`shrink-0 inline-flex w-[calc(3ch+0.5rem)] justify-center rounded border py-px font-mono text-[10px] font-semibold leading-none tracking-wider ${cls.badge}`}
       >
         {levelLabel[level]}
       </span>
