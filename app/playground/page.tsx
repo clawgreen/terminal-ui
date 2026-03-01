@@ -1,5 +1,5 @@
 import { TerminalApp } from '@/components/terminal-app'
-import { Terminal, TerminalCommand, TerminalDiff, TerminalOutput, TerminalSpinner, TerminalBadge, ThemeSwitcher } from '@/components/terminal'
+import { Terminal, TerminalCommand, TerminalDiff, TerminalOutput, TerminalSpinner, TerminalBadge, TerminalMarker, ThemeSwitcher } from '@/components/terminal'
 import { TerminalProgress } from '@/components/terminal-progress'
 import { LogDemo } from './log-demo'
 import { PromptDemo } from './prompt-demo'
@@ -158,6 +158,28 @@ export default function PlaygroundPage() {
               <TerminalBadge variant="error">EXIT 1</TerminalBadge>
             </span>
           </TerminalOutput>
+        </Terminal>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
+          TerminalMarker
+        </h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Phase separators for visual boundaries in terminal feeds.
+        </p>
+        <Terminal title="deploy-pipeline.sh">
+          <TerminalCommand>npm run deploy:full</TerminalCommand>
+          <TerminalMarker label="BUILD" timestamp="10:23:45" variant="info" />
+          <TerminalOutput type="success">✓ Compiled 42 modules</TerminalOutput>
+          <TerminalOutput type="normal">  dist/main.js  124 KB</TerminalOutput>
+          <TerminalMarker label="TEST" timestamp="10:24:01" variant="success" />
+          <TerminalOutput type="success">✓ 24 tests passed</TerminalOutput>
+          <TerminalOutput type="normal">  coverage: 94%</TerminalOutput>
+          <TerminalMarker label="DEPLOY" timestamp="10:24:30" variant="warning" />
+          <TerminalOutput type="info">→ Deploying to production...</TerminalOutput>
+          <TerminalOutput type="success">✓ Deployed successfully</TerminalOutput>
+          <TerminalMarker label="DONE" timestamp="10:24:45" variant="success" />
         </Terminal>
       </section>
 
