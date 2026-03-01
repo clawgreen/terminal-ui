@@ -12,7 +12,9 @@ import {
 } from '@/components/terminal'
 import { TerminalProgress } from '@/components/terminal-progress'
 import { LogDemo, StructuredLogDemo } from './log-demo'
+import { FilterBarDemo } from './filter-demo'
 import { PromptDemo } from './prompt-demo'
+import { SearchDemo } from './search-demo'
 import { TreeDemo } from './tree-demo'
 import { TreeKeyboardDemo } from './tree-keyboard-demo'
 
@@ -245,6 +247,14 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalSearch</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          In-feed search with next / prev navigation (Enter / Shift+Enter) and match highlighting.
+        </p>
+        <SearchDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">Typing Animation</h2>
         <Terminal title="deploy-log.sh">
           <TerminalCommand>npm run deploy</TerminalCommand>
@@ -255,6 +265,15 @@ export default function PlaygroundPage() {
             Deployment complete. URL: https://example.app
           </TerminalOutput>
         </Terminal>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalFilterBar</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Controlled filter bar — level toggles, text search, and source toggles. Pair with{' '}
+          <code>filterEntries()</code> to apply.
+        </p>
+        <FilterBarDemo />
       </section>
     </main>
   )

@@ -286,3 +286,18 @@ export { ThemeSwitcher } from './theme-switcher'
 export { TerminalBadge } from './terminal-badge'
 export { TerminalMarker } from './terminal-marker'
 export { TerminalLogLine, type TerminalLogLineProps } from './terminal-log-line'
+export {
+  TerminalSearch,
+  useTerminalSearch,
+  type TerminalSearchProps,
+  type UseTerminalSearchOptions,
+  type UseTerminalSearchResult,
+} from './terminal-search'
+export {
+  TerminalFilterBar,
+  filterEntries,
+  emptyFilterState,
+  type TerminalFilterBarProps,
+  type FilterBarState,
+  type LogLevel,
+} from './terminal-filter-bar'
