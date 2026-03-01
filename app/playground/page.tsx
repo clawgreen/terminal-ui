@@ -11,7 +11,7 @@ import {
   ThemeSwitcher,
 } from '@/components/terminal'
 import { TerminalProgress } from '@/components/terminal-progress'
-import { LogDemo } from './log-demo'
+import { LogDemo, StructuredLogDemo } from './log-demo'
 import { PromptDemo } from './prompt-demo'
 import { TreeDemo } from './tree-demo'
 import { TreeKeyboardDemo } from './tree-keyboard-demo'
@@ -63,11 +63,24 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalLog</h2>
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
+          TerminalLog — string mode
+        </h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Simulated streaming logs with capped history and auto-scroll.
         </p>
         <LogDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
+          TerminalLog — structured mode
+        </h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Structured entries with level badges, timestamps, and source labels via{' '}
+          <code>entries</code> prop.
+        </p>
+        <StructuredLogDemo />
       </section>
 
       <section className="flex flex-col gap-2">
