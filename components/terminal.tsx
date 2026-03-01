@@ -286,6 +286,7 @@ export { ThemeSwitcher } from './theme-switcher'
 export { TerminalBadge } from './terminal-badge'
 export { TerminalMarker } from './terminal-marker'
 export { TerminalLogLine, type TerminalLogLineProps } from './terminal-log-line'
+export { TerminalGroup, type TerminalGroupProps, type GroupVariant } from './terminal-group'
 export {
   TerminalSearch,
   useTerminalSearch,
@@ -301,3 +302,5 @@ export {
   type FilterBarState,
   type LogLevel,
 } from './terminal-filter-bar'
+export { TerminalStackTrace, type TerminalStackTraceProps } from './terminal-stack-trace'
+export { TerminalJsonLine, type TerminalJsonLineProps } from './terminal-json-line'

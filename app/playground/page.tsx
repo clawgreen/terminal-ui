@@ -13,10 +13,13 @@ import {
 import { TerminalProgress } from '@/components/terminal-progress'
 import { LogDemo, StructuredLogDemo } from './log-demo'
 import { FilterBarDemo } from './filter-demo'
+import { TerminalJsonLine } from '@/components/terminal'
 import { PromptDemo } from './prompt-demo'
+import { GroupDemo } from './group-demo'
 import { SearchDemo } from './search-demo'
 import { TreeDemo } from './tree-demo'
 import { TreeKeyboardDemo } from './tree-keyboard-demo'
+import { StackTraceDemo } from './stack-trace-demo'
 
 export const metadata = {
   title: 'Playground',
@@ -247,6 +250,14 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalGroup</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Collapsible command/output sections with header, summary, count pill, and variant accent.
+        </p>
+        <GroupDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalSearch</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           In-feed search with next / prev navigation (Enter / Shift+Enter) and match highlighting.
@@ -268,12 +279,74 @@ export default function PlaygroundPage() {
       </section>
 
       <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">
+          TerminalStackTrace
+        </h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Foldable stack trace viewer with per-frame collapse, node_modules filtering, and
+          keyboard-accessible toggles.
+        </p>
+        <StackTraceDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalFilterBar</h2>
         <p className="text-sm text-[var(--term-fg-dim)] font-mono">
           Controlled filter bar — level toggles, text search, and source toggles. Pair with{' '}
           <code>filterEntries()</code> to apply.
         </p>
         <FilterBarDemo />
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold font-mono text-[var(--term-fg)]">TerminalJsonLine</h2>
+        <p className="text-sm text-[var(--term-fg-dim)] font-mono">
+          Collapsible JSON payload renderer — click to expand, handles invalid JSON safely.
+        </p>
+        <Terminal title="events.log">
+          <TerminalCommand>tail -f logs/events.log</TerminalCommand>
+          <TerminalJsonLine
+            label="deploy"
+            payload={{
+              type: 'deploy',
+              status: 'success',
+              durationMs: 1240,
+              region: 'us-east-1',
+              sha: 'a3f9c12',
+            }}
+          />
+          <TerminalJsonLine
+            label="request"
+            payload={{
+              method: 'POST',
+              path: '/api/publish',
+              statusCode: 200,
+              latencyMs: 84,
+              userId: 'u_8f3a',
+            }}
+          />
+          <TerminalJsonLine
+            label="error"
+            payload={{
+              code: 'ECONNREFUSED',
+              host: '127.0.0.1',
+              port: 5432,
+              retries: 3,
+              fatal: false,
+            }}
+            defaultExpanded
+          />
+          <TerminalJsonLine label="response" payload="not { valid ] json at all" />
+          <TerminalJsonLine
+            label="config"
+            payload={{
+              version: '2.1.0',
+              features: { darkMode: true, telemetry: false, maxConnections: 10 },
+              plugins: ['auth', 'cache', 'ratelimit'],
+              endpoints: { api: 'https://api.example.com', cdn: 'https://cdn.example.com' },
+            }}
+          />
+        </Terminal>
       </section>
     </main>
   )
